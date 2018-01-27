@@ -26,7 +26,6 @@ public class UniqueWordChecker implements Callable<Boolean> {
     public Boolean call() throws ForeignCharacterException, IOException {
         StringBuilder word = new StringBuilder();
 
-        System.out.println("*");
         int c = reader.next();
         while (c != -1) {
             //building a word with appropriate symbols
