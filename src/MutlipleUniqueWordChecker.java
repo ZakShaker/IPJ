@@ -7,9 +7,6 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.*;
 
-/**
- * Created by user on 27.01.2018.
- */
 public abstract class MutlipleUniqueWordChecker {
     protected Map<String, Integer> uniqueWords; // map ow words in the source
 

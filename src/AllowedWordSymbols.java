@@ -1,6 +1,3 @@
-/**
- * Created by user on 27.01.2018.
- */
 public interface AllowedWordSymbols {
     boolean isPartOfWord(char c);
 
