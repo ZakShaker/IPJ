@@ -1,4 +1,7 @@
 # IPJ
+
+![alt text](https://github.com/ZakShaker/IPJ/blob/master/photo_2018-01-27_23-34-17.jpg)
+
 **Задание**
 
 Необходимо разработать программу, которая получает на вход список ресурсов, содержащих текст,
@@ -19,5 +22,4 @@
 Логику подоходящих слов и символов тоже можно дополнять с интерфейсом _AllowedSymbols_.
 
 Абстрактный класс**MultipleUniqueWordChecker**проверяет уникальность слов в нескольких ресурсах. 
-Классы _ConcurrentUniqueWordChecker_ и _SynchronizedUniqueWordChecker_, наследующе его, делают это с помощью ConcurrentHashMap и Collections.Synchronized(HashMap) соответственно. Разница работы по времени каждого из них при равном количестве равных ресурсов продемонстирована в классе **Main**
-
+Классы _ConcurrentUniqueWordChecker_ и _SynchronizedUniqueWordChecker_, наследующе его, делают это с помощью ConcurrentHashMap и Collections.Synchronized(HashMap) соответственно. Разница работы по времени каждого из них при равном количестве равных ресурсов продемонстирована в классе **Main**.
