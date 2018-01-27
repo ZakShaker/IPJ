@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /*
 Необходимо разработать программу, которая получает на вход список ресурсов, содержащих текст,
@@ -9,26 +12,34 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        ArrayList<String> inputFileNames = new ArrayList<>();
-        for (int i = 0; i < 800; i++) {
-            i++;
-            String fileName = "text_" + i + ".txt";
-            inputFileNames.add(fileName);
+        HashSet<SerialCharacterReader> readers = new HashSet<>(799);
+
+        for (int i = 1; i <= 799; i++) {
+            String fileName = "texts/text_" + i + ".txt";
+            readers.add(
+                    new UTF8SerialFileReader(
+                            new File(fileName)
+                    )
+            );
         }
+
+        ConcurrentUniqueWordChecker concurrentUniqueWordChecker =
+                new ConcurrentUniqueWordChecker(
+                        readers,
+                        new RussianWordSymbols()
+                );
 
         try {
-            String repeatedWord = MultithreadUniqueWordChecker.checkUniqueness("input.txt");
-            if (repeatedWord == null) {
-                System.out.println("The text is unique");
+            if (concurrentUniqueWordChecker.checkUniqueness()) {
+                System.out.println("<<< The text doesn't have repeats! >>>");
             } else {
-                System.out.println("The text is not unique. Repeated word is \"" + repeatedWord + "\"");
+                System.out.println("<<< The text has repeats :-/ >>>");
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            System.out.println("Done!");
+        } catch (ForeignCharacterException e) {
+            System.out.println("Sources have foreign characters");
         }
     }
+
 }
