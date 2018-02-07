@@ -8,7 +8,7 @@ import java.util.Stack;
 import java.util.concurrent.*;
 
 public abstract class MutlipleUniqueWordChecker {
-    protected Map<String, Integer> uniqueWords; // map ow words in the source
+    protected Map<String, Integer> uniqueWords; // map or words in the source
 
     protected Set<SerialCharacterReader> readers;
     protected AllowedWordSymbols allowedWordSymbols;
@@ -25,6 +25,7 @@ public abstract class MutlipleUniqueWordChecker {
         ExecutorService executor = Executors.newCachedThreadPool();
 
         for (SerialCharacterReader r : readers) {
+
             UniqueWordChecker checker = new UniqueWordChecker(uniqueWords, r, allowedWordSymbols);
             resourceUniquenessResults.add(executor.submit(checker));
         }

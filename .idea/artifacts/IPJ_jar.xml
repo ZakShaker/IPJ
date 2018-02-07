@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="IPJ:jar">
+    <output-path>$PROJECT_DIR$/../../../word10</output-path>
+    <root id="archive" name="IPJ.jar">
+      <element id="module-output" name="IPJ" />
+    </root>
+  </artifact>
+</component>

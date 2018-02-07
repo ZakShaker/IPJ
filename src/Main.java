@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 
 public class Main {
@@ -8,7 +10,7 @@ public class Main {
 
         HashSet<SerialCharacterReader> readers = new HashSet<>(799);
 
-        for (int i = 1; i <= 799; i++) {
+        for (int i = 1; i <= 4; i++) {
             String fileName = "texts/text_" + i + ".txt";
             readers.add(
                     new UTF8SerialFileReader(
@@ -16,30 +18,8 @@ public class Main {
                     )
             );
         }
-
-        // Test #1
-        ConcurrentUniqueWordChecker concurrentUniqueWordChecker =
-                new ConcurrentUniqueWordChecker(
-                        readers,
-                        new RussianWordSymbols()
-                );
-
         long startTime = System.currentTimeMillis();
 
-        try {
-            if (concurrentUniqueWordChecker.checkUniqueness()) {
-                System.out.println("\n <<< The text doesn't have repeats! >>>");
-            } else {
-                System.out.println("\n <<< The text has repeats :-/ >>>");
-            }
-        } catch (ForeignCharacterException e) {
-            System.out.println("\n Sources have foreign characters");
-        }
-
-        System.out.println("\n Time consumed when Concurrent: " + (System.currentTimeMillis() - startTime));
-
-
-        // Test #2
         SynchronizedUniqueWordChecker synchronizedUniqueWordChecker =
                 new SynchronizedUniqueWordChecker(
                         readers,
@@ -48,17 +28,24 @@ public class Main {
 
         startTime = System.currentTimeMillis();
 
-        try {
-            if (synchronizedUniqueWordChecker.checkUniqueness()) {
-                System.out.println("\n <<< The text doesn't have repeats! >>>");
-            } else {
-                System.out.println("\n <<< The text has repeats :-/ >>>");
+        while (true) {
+            try {
+                //Здесь ждем
+                new BufferedReader(new InputStreamReader(System.in)).readLine();
+
+                if (synchronizedUniqueWordChecker.checkUniqueness()) {
+                    System.out.println("\n <<< The text doesn't have repeats! >>>");
+                } else {
+                    System.out.println("\n <<< The text has repeats :-/ >>>");
+                }
+            } catch (ForeignCharacterException e) {
+                System.out.println("\n Sources have foreign characters");
             }
-        } catch (ForeignCharacterException e) {
-            System.out.println("\n Sources have foreign characters");
+
+            System.out.println("\n Time consumed when Synchronized: " + (System.currentTimeMillis() - startTime));
+
         }
 
-        System.out.println("\n Time consumed when Synchronized: " + (System.currentTimeMillis() - startTime));
 
 
     }
