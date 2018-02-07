@@ -1,5 +1,9 @@
 # IPJ
-Архитектура приложения имела следующую структуру
+
+Сейчас архитектура приложения выглядит так:
+![alt text](https://github.com/ZakShaker/IPJ/blob/master/ClassDiagram-2.png)
+
+До добавления ClassLoader-ов было так:
 ![alt text](https://github.com/ZakShaker/IPJ/blob/master/photo_2018-01-27_23-34-17.jpg)
 
 **Первоначальное задание**
@@ -25,7 +29,7 @@
 Классы _ConcurrentUniqueWordChecker_ и _SynchronizedUniqueWordChecker_, наследующе его, делают это с помощью ConcurrentHashMap и Collections.Synchronized(HashMap) соответственно. Разница работы по времени каждого из них при равном количестве равных ресурсов продемонстирована в классе **Main**.
 
 
-**Второй вариант с исопльзованием ClassLoader**
+**Второй вариант с использованием ClassLoader**
 Класс _UniqueWordChecker_ теперь вызывает в методе call() метод checkcUniqueness() из интерфейса __UniqueChecker__.
 Этот интерфейс могут реализовать два Класса **UniqueWholeWordChecker** и **Unique10SymbolsChecker**, каждый из них будет реализовывать проверку уникльности по-своему.
 НО(!), поскольку задание требует подгрузки класса с одним и тем же названием, то обе реализации выполнены в двух файлах под одним и тем же именем UniqueWholeWordChecker в двух одноименных jar-файлах, поочередно лежащих в папке word10 под именем IPJ.
