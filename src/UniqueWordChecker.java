@@ -29,7 +29,10 @@ public class UniqueWordChecker implements Callable<Boolean> {
 
     @Override
     public Boolean call() throws ForeignCharacterException, IOException {
-        return uniqueChecker.checkUniqueness(reader, uniqueWords, allowedWordSymbols);
+        Boolean result = uniqueChecker.checkUniqueness(reader, uniqueWords, allowedWordSymbols);
+        //closing the reader after checking
+        reader.close();
+        return result;
     }
 
 }
