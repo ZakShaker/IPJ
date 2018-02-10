@@ -1,8 +1,23 @@
-public interface AllowedWordSymbols {
-    boolean isPartOfWord(char c);
+public class AllowedWordSymbols {
+    private PartOfWordDetector partOfWordDetector;
+    private PunctuationDetector punctuationDetector;
+    private EmptyWordDetector emptyWordDetector;
 
-    boolean isPunctuation(char c);
+    AllowedWordSymbols(PartOfWordDetector partOfWordDetector, PunctuationDetector punctuationDetector, EmptyWordDetector emptyWordDetector) {
+        this.partOfWordDetector = partOfWordDetector;
+        this.punctuationDetector = punctuationDetector;
+        this.emptyWordDetector = emptyWordDetector;
+    }
 
-    //returns true if the sequence of chars in a word is considered as empty
-    boolean wordIsEmpty(String word);
+    public boolean isPartOfWord(char c) {
+        return partOfWordDetector.isPartOfWord(c);
+    }
+
+    public boolean isPunctuation(char c) {
+        return punctuationDetector.isPunctuation(c);
+    }
+
+    public boolean wordIsEmpty(String word) {
+        return emptyWordDetector.wordIsEmpty(word);
+    }
 }

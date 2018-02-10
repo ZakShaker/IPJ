@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class UniqueWholeWordChecker implements UniqueChecker {
     @Override
@@ -17,7 +18,9 @@ public class UniqueWholeWordChecker implements UniqueChecker {
                     System.out.println("Foreign symbol");
                     throw new ForeignCharacterException("The source has a foreign character. Only cyrillic letters, digits and punctuation are allowed.");
                 }
+
                 String wordString = word.toString().toLowerCase();
+
                 if (allowedWordSymbols.wordIsEmpty(wordString)) {
                     word = new StringBuilder();
                 } else {

@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
